@@ -13,7 +13,31 @@ public class MethodParser extends Parser<Method> {
 
 	@Override
 	public boolean shouldParse(String line) {
-		return line.matches("method [a-zA-Z][a-zA-Z0-9]* requires \\(([a-zA-Z][a-zA-Z0-9]* [a-zA-Z][a-zA-Z0-9]*)*\\) returns [a-zA-Z][a-zA-Z0-9]*");
+		String[] firstSplit = line.split("\\(");
+		String[] secondSplit , params;
+		if(firstSplit.length == 2) {
+			secondSplit = firstSplit[1].split("\\)");
+			params = secondSplit[0].split(",");
+		}
+		else {
+			return false;
+		}
+
+		
+		if(firstSplit[0].matches("method [a-zA-Z][a-zA-Z0-9]* requires ")){
+			for(String s : params) {
+				 if(!s.equals("") && !s.matches("[a-zA-Z][a-zA-Z0-9]* [a-zA-Z][a-zA-Z0-9]*")){
+					 System.out.println("false");
+					 return false;
+				 }
+			}
+			
+			if(secondSplit[1].matches(" returns [a-zA-Z][a-zA-Z0-9]*")) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	@Override

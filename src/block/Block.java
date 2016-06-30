@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import Random.Variable;
+import parser.ClassParser;
+import parser.MethodParser;
+import parser.Parser;
+import parser.VariableParser;
+import tokenizer.Tokenizer;
 
 /**
  * Represents a block of code.
